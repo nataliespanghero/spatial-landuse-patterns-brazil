@@ -56,8 +56,7 @@ def main() -> None:
     # bio1 é temperatura * 10 em WorldClim. Duas versões:
     bio1_mean_raw = _zs_mean(gdf, BIO1_TIF, "bio1")
     df["bio1_mean_raw"] = bio1_mean_raw
-    df["bio1_mean_c"] = df["bio1_mean_raw"] / 10.0  # °C
-
+    df["bio1_mean_c"] = df["bio1_mean_raw"]
     bio12_mean = _zs_mean(gdf, BIO12_TIF, "bio12")
     df["bio12_mean_mm"] = bio12_mean  # mm
 
