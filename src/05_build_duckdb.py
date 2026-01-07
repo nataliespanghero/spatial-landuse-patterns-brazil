@@ -10,7 +10,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DATA_PROCESSED = PROJECT_ROOT / "data" / "processed"
 DB_PATH = PROJECT_ROOT / "data" / "database" / "analytics.duckdb"
 
-HEX_PATH = DATA_PROCESSED / "h3_res6_cerrado.parquet"
+HEX_PATH = DATA_PROCESSED / "h3_res6_pantanal.parquet"
 ENV_PATH = DATA_PROCESSED / "features_worldclim.parquet"
 
 

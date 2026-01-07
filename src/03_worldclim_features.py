@@ -12,7 +12,7 @@ DATA_PROCESSED = PROJECT_ROOT / "data" / "processed"
 DATA_RAW = PROJECT_ROOT / "data" / "raw"
 
 H3_RES = 6
-HEX_PATH = DATA_PROCESSED / f"h3_res{H3_RES}_cerrado.parquet"
+HEX_PATH = DATA_PROCESSED / f"h3_res{H3_RES}_pantanal.parquet"
 
 # Coloque seus GeoTIFFs aqui:
 # data/raw/worldclim/

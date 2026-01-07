@@ -23,7 +23,7 @@ The goal is to identify meaningful territorial patterns based on land-use compos
 
 ## 🗺️ Study Area
 
-- **Region:** Brazilian Cerrado biome  
+- **Region:** Brazilian Pantanal biome  
 - **Spatial unit:** H3 hexagons (resolution 6)
 
 ---

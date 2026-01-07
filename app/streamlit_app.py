@@ -12,7 +12,7 @@ from streamlit_folium import st_folium
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DATA_PROCESSED = PROJECT_ROOT / "data" / "processed"
 
-HEX_GEOJSON = DATA_PROCESSED / "h3_res6_cerrado.geojson"
+HEX_GEOJSON = DATA_PROCESSED / "h3_res6_pantanal.geojson"
 FEAT_WC = DATA_PROCESSED / "features_worldclim.parquet"
 
 
@@ -25,8 +25,8 @@ def load_data():
 
 
 def main():
-    st.set_page_config(page_title="Brazil Cerrado – Environmental Drivers (H3)", layout="wide")
-    st.title("Brazil Cerrado — Environmental Drivers (H3 res 6)")
+    st.set_page_config(page_title="Brazil Pantanal – Environmental Drivers (H3)", layout="wide")
+    st.title("Brazil Pantanal — Environmental Drivers (H3 res 6)")
     st.caption("WorldClim features aggregated to H3 hexagons.")
 
     gdf = load_data()

@@ -10,10 +10,10 @@ DATA_PROCESSED = PROJECT_ROOT / "data" / "processed"
 BIOMES_PATH = PROJECT_ROOT / "data" / "raw" / "ibge_biomas.gpkg"
 BIOMES_LAYER = None  # se for gpkg e tiver layer específico, coloque o nome aqui
 
-AOI_NAME = "Cerrado"
+AOI_NAME = "Pantanal"
 
-OUT_GPKG = DATA_PROCESSED / "aoi_cerrado.gpkg"
-OUT_GPQ = DATA_PROCESSED / "aoi_cerrado.parquet"
+OUT_GPKG = DATA_PROCESSED / "aoi_pantanal.gpkg"
+OUT_GPQ = DATA_PROCESSED / "aoi_pantanal.parquet"
 
 
 def _find_biome_column(gdf: gpd.GeoDataFrame) -> str:
@@ -35,11 +35,11 @@ def _find_biome_column(gdf: gpd.GeoDataFrame) -> str:
     for c in candidates:
         if c in gdf.columns:
             return c
-    # fallback: procura alguma coluna string que contenha 'cerrado'
+    # fallback: procura alguma coluna string que contenha 'pantanal'
     for c in gdf.columns:
         if gdf[c].dtype == "object":
             sample = gdf[c].astype(str).str.lower()
-            if sample.str.contains("cerrado").any():
+            if sample.str.contains("pantanal").any():
                 return c
     raise ValueError(
         f"Não consegui identificar a coluna do nome do bioma. Colunas: {list(gdf.columns)}"
@@ -107,7 +107,7 @@ def main() -> None:
     aoi.to_parquet(OUT_GPQ, index=False)
 
     bounds = aoi.total_bounds  # minx, miny, maxx, maxy
-    print("✅ AOI Cerrado gerado com sucesso.")
+    print("✅ AOI Pantanal gerado com sucesso.")
     print(f"   - GPKG: {OUT_GPKG}")
     print(f"   - GeoParquet: {OUT_GPQ}")
     print(f"   - Bounds (WGS84): {bounds}")

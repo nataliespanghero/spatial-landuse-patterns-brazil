@@ -12,13 +12,13 @@ import h3
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DATA_PROCESSED = PROJECT_ROOT / "data" / "processed"
 
-AOI_GPKG = DATA_PROCESSED / "aoi_cerrado.gpkg"
+AOI_GPKG = DATA_PROCESSED / "aoi_pantanal.gpkg"
 AOI_LAYER = "aoi"
 
 H3_RES = 6
 
-OUT_GPQ = DATA_PROCESSED / f"h3_res{H3_RES}_cerrado.parquet"
-OUT_GEOJSON = DATA_PROCESSED / f"h3_res{H3_RES}_cerrado.geojson"
+OUT_GPQ = DATA_PROCESSED / f"h3_res{H3_RES}_pantanal.parquet"
+OUT_GEOJSON = DATA_PROCESSED / f"h3_res{H3_RES}_pantanal.geojson"
 
 
 def _aoi_to_h3shape(aoi_geom) -> h3.LatLngPoly:
@@ -60,7 +60,7 @@ def main() -> None:
 
     if not AOI_GPKG.exists():
         raise FileNotFoundError(
-            f"AOI não encontrado em {AOI_GPKG}. Rode primeiro: src/01_aoi_cerrado.py"
+            f"AOI não encontrado em {AOI_GPKG}. Rode primeiro: src/01_aoi_pantanal.py"
         )
 
     aoi = gpd.read_file(AOI_GPKG, layer=AOI_LAYER)
