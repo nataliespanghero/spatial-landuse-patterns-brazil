@@ -1,0 +1,12 @@
+geopandas
+pandas
+numpy
+shapely
+h3
+rasterio
+xarray
+duckdb
+pyarrow
+scikit-learn
+streamlit
+folium
