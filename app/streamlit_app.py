@@ -7,12 +7,13 @@ import pandas as pd
 import streamlit as st
 import folium
 from streamlit_folium import st_folium
+import branca.colormap as cm
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DATA_PROCESSED = PROJECT_ROOT / "data" / "processed"
 
-HEX_GEOJSON = DATA_PROCESSED / "h3_res6_pantanal.geojson"
+HEX_GEOJSON = DATA_PROCESSED / "h3_res6_pantanal_clusters.geojson"
 FEAT_WC = DATA_PROCESSED / "features_worldclim.parquet"
 
 
@@ -32,8 +33,8 @@ def main():
     gdf = load_data()
 
     metric = st.selectbox(
-        "Select metric",
-        ["bio12_mean_mm", "bio1_mean_c"],
+        "Select layer",
+        ["cluster_id", "bio12_mean_mm", "bio1_mean_c"],
         index=0,
     )
 
@@ -41,16 +42,37 @@ def main():
     centroid = gdf.unary_union.centroid
     m = folium.Map(location=[centroid.y, centroid.x], zoom_start=5, tiles="CartoDB positron")
 
-    # Choropleth
-    folium.Choropleth(
-        geo_data=gdf.to_json(),
-        data=gdf[["h3_id", metric]],
-        columns=["h3_id", metric],
-        key_on="feature.properties.h3_id",
-        fill_opacity=0.7,
-        line_opacity=0.1,
-        legend_name=metric,
-    ).add_to(m)
+    if metric == "cluster_id":
+        # colormap discreto simples
+        n_clusters = int(gdf["cluster_id"].max()) + 1
+        palette = cm.linear.Set1_09.scale(0, max(1, n_clusters - 1))
+
+        def style_fn(feat):
+            cid = feat["properties"].get("cluster_id")
+            if cid is None:
+                return {"fillOpacity": 0.0, "weight": 0.0}
+            return {
+                "fillColor": palette(cid),
+                "color": "#222222",
+                "weight": 0.2,
+                "fillOpacity": 0.65,
+            }
+
+        folium.GeoJson(
+            gdf,
+            style_function=style_fn,
+            name="clusters",
+        ).add_to(m)
+    else:
+        folium.Choropleth(
+            geo_data=gdf.to_json(),
+            data=gdf[["h3_id", metric]],
+            columns=["h3_id", metric],
+            key_on="feature.properties.h3_id",
+            fill_opacity=0.7,
+            line_opacity=0.1,
+            legend_name=metric,
+        ).add_to(m)
 
     # Tooltip layer (light)
     folium.GeoJson(
@@ -59,6 +81,8 @@ def main():
             fields=["h3_id", "bio1_mean_c", "bio12_mean_mm"],
             aliases=["H3:", "Temp (°C):", "Precip (mm):"],
             localize=True,
+            fields=["h3_id", "cluster_id", "bio1_mean_c", "bio12_mean_mm"],
+            aliases=["H3:", "Cluster:", "Temp (°C):", "Precip (mm):"],
         ),
         name="tooltips",
     ).add_to(m)
