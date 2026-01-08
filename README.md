@@ -1,3 +1,8 @@
+## Interactive Application
+
+![Pantanal land cover clustering app](assets/screenshots/spatial-landuse-patterns.png)
+**Live demo:**: 
+
 # Spatial Land Cover Patterns in the Brazilian Pantanal
 
 This project analyzes land-cover patterns in the Brazilian Pantanal using a hexagonal H3 grid and environmental drivers derived from global raster datasets.
