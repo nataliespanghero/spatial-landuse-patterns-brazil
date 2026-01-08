@@ -20,8 +20,6 @@ FEAT_WC = DATA_PROCESSED / "features_worldclim.parquet"
 @st.cache_data
 def load_data():
     gdf = gpd.read_file(HEX_GEOJSON)
-    df = pd.read_parquet(FEAT_WC)
-    gdf = gdf.merge(df, on="h3_id", how="left")
     return gdf
 
 
@@ -39,7 +37,7 @@ def main():
     )
 
     # Center map
-    centroid = gdf.unary_union.centroid
+    centroid = gdf.geometry.union_all().centroid
     m = folium.Map(location=[centroid.y, centroid.x], zoom_start=5, tiles="CartoDB positron")
 
     if metric == "cluster_id":
@@ -78,9 +76,9 @@ def main():
     folium.GeoJson(
         gdf,
         tooltip=folium.GeoJsonTooltip(
-            fields=["h3_id", "cluster_id", "bio1_mean_c", "bio12_mean_mm"],
-            aliases=["H3:", "Cluster:", "Temp (°C):", "Precip (mm):"],
-            localize=True
+            fields=["h3_id", "cluster_id", "bio1_mean_c", "bio12_mean_mm", "p_wetland", "p_tree", "p_water", "p_cropland"],
+            aliases=["H3:", "Cluster:", "Temp (°C):", "Precip (mm):", "Wetland:", "Tree:", "Water:", "Cropland:"],
+            localize=True,
         ),
         name="tooltips",
     ).add_to(m)
