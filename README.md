@@ -1,7 +1,7 @@
 ## Interactive Application
 
 ![Pantanal land cover clustering app](assets/screenshots/spatial-landuse-patterns.png)
-**Live demo:**: 
+**Live demo:**: https://spatial-landuse-patterns-brazil.streamlit.app/
 
 # Spatial Land Cover Patterns in the Brazilian Pantanal
 
