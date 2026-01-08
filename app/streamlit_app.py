@@ -14,7 +14,7 @@ from streamlit_folium import st_folium
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DATA_PROCESSED = PROJECT_ROOT / "data" / "processed"
 
-HEX_GEOJSON = DATA_PROCESSED / "h3_res6_pantanal_clusters.geojson"
+HEX_GEOJSON = DATA_PROCESSED / "app" / "data" / "pantanal_h3_res6_clusters.geojson"
 
 
 # -----------------------------
