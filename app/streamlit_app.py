@@ -78,11 +78,9 @@ def main():
     folium.GeoJson(
         gdf,
         tooltip=folium.GeoJsonTooltip(
-            fields=["h3_id", "bio1_mean_c", "bio12_mean_mm"],
-            aliases=["H3:", "Temp (°C):", "Precip (mm):"],
-            localize=True,
             fields=["h3_id", "cluster_id", "bio1_mean_c", "bio12_mean_mm"],
             aliases=["H3:", "Cluster:", "Temp (°C):", "Precip (mm):"],
+            localize=True
         ),
         name="tooltips",
     ).add_to(m)
