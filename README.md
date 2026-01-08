@@ -1,75 +1,80 @@
-# Spatial Land Use Patterns in Brazil
+# Spatial Land Cover Patterns in the Brazilian Pantanal
 
-This project explores spatial patterns of land use in Brazil using a hexagonal H3 grid and environmental drivers such as climate and elevation.
+This project analyzes land-cover patterns in the Brazilian Pantanal using a hexagonal H3 grid and environmental drivers derived from global raster datasets.
 
-The goal is to identify meaningful territorial patterns based on land-use composition and to understand how environmental variables help explain these patterns — moving beyond descriptive maps toward analytical spatial insights.
-
----
-
-## 🎯 Objectives
-
-- Build a reproducible spatial data pipeline from raw data to analysis
-- Aggregate land-use and environmental variables using an H3 grid
-- Identify spatial patterns using clustering techniques
-- Explain land-use patterns with environmental drivers
-- Deliver results through an interactive analytical app
+The objective is to move beyond descriptive land-cover maps by identifying spatially coherent landscape patterns and relating them to climate and land-cover composition through unsupervised clustering.
 
 ---
 
-## 🧱 Project Architecture
+## Objectives
 
+- Build a reproducible spatial data pipeline from raw raster data to analysis-ready features
+- Aggregate land-cover and climate variables using an H3 hexagonal grid
+- Identify dominant land-cover patterns through clustering techniques
+- Support interpretation of spatial patterns using environmental drivers
+- Deliver results through an interactive analytical application
 
 ---
 
-## 🗺️ Study Area
+## Study Area
 
 - **Region:** Brazilian Pantanal biome  
 - **Spatial unit:** H3 hexagons (resolution 6)
 
 ---
 
-## 📊 Data Sources
+## Data Sources
 
-- **Land Use / Land Cover:** ESA WorldCover (10 m)
-- **Climate:** WorldClim v2.1 (temperature & precipitation)
-- **Elevation:** Copernicus DEM GLO-30 (optional)
-- **Administrative / Biome boundaries:** IBGE
-
----
-
-## 🧠 Methods Overview
-
-- Raster aggregation to hexagonal spatial units
-- Feature engineering based on land-use proportions
-- Spatial clustering of land-use patterns
-- Post-hoc analysis of environmental drivers per cluster
+- **Land Cover:** ESA WorldCover 2021 (10 m resolution)  
+- **Climate:** WorldClim v2.1 (BIO1 – temperature, BIO12 – precipitation)  
+- **Biome boundaries:** IBGE  
 
 ---
 
-## 🌍 Interactive App
+## Methodology Overview
 
-The project includes a Streamlit application that allows users to:
-
-- Explore land-use patterns spatially
-- Filter and inspect clusters
-- Compare environmental conditions across patterns
-
-*(App deployment link will be added)*
-
----
-
-## 📁 Repository Structure
-
+1. Definition of the area of interest (Pantanal biome)
+2. Generation of an H3 hexagonal grid (resolution 6)
+3. Aggregation of categorical land-cover data into proportional features per hexagon
+4. Integration of climate variables at the same spatial resolution
+5. Unsupervised clustering (KMeans) to identify dominant land-cover patterns
+6. Post-clustering analysis of environmental characteristics
 
 ---
 
-## 🚀 Status
+## Interactive Application
 
-🟡 In development — data pipeline and feature engineering in progress.
+An interactive Streamlit application is provided to explore the results.
+
+The app allows users to:
+- Visualize land-cover clusters spatially
+- Inspect land-cover composition and climate attributes per hexagon
+- Compare cluster profiles through summary tables
+
+The application is designed as an analytical exploration tool rather than a static map.
+
+*(Deployment link to be added)*
 
 ---
 
-## 📌 Author
+## Repository Structure
 
-**Natalie Spanghero**  
-Geospatial Analyst | Spatial Data & Analytics  
+├── app/                    # Streamlit application
+├── src/                    # Data processing and analysis scripts
+├── data/
+│   ├── raw/                # Raw raster and vector data
+│   └── processed/          # Aggregated features and outputs
+├── README.md
+└── requirements.txt
+
+---
+
+## Project Status
+
+Stable prototype.
+Core data pipeline, clustering, and interactive visualization are implemented.
+
+## Author
+
+Natalie Spanghero
+Geospatial Analyst — Spatial Data, Environmental Analysis, and Geospatial Analytics

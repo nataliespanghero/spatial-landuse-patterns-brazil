@@ -73,7 +73,7 @@ def main() -> None:
         str(WC_RASTER),
         categorical=True,
         all_touched=True,
-        nodata=None,
+        nodata=0,
         geojson_out=False,
     )
     
